@@ -7,5 +7,27 @@ generator client {
 
 datasource db {
   provider = "sqlite"
-  url      = env("DATABASE_URL")
+  url      = "file:./app.db"
+}
+
+model Connection {
+  id               Int      @id @default(autoincrement())
+  created          DateTime @default(now())
+  updated          DateTime @default(now())
+  editable         Boolean  @default(true)
+  alias            String   @unique
+  description      String?
+  connectionString String
+
+  History History[]
+}
+
+model History {
+  id      Int      @id @default(autoincrement())
+  created DateTime @default(now())
+  updated DateTime @default(now())
+  query   String
+
+  connection   Connection @relation(fields: [connectionId], references: [id])
+  connectionId Int
 }

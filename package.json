@@ -4,6 +4,7 @@
     "sqlq": "./bin/run.js"
   },
   "scripts": {
+    "dev": "pnpm run build && node ./bin/run.js",
     "build": "shx rm -rf dist && tsc -b",
     "lint": "eslint . --ext .ts",
     "postpack": "shx rm -f oclif.manifest.json",
@@ -18,9 +19,10 @@
     "@oclif/core": "^3",
     "@oclif/plugin-help": "^5",
     "@oclif/plugin-plugins": "^4",
+    "@prisma/client": "5.7.0",
     "prisma": "^5.7.0"
   },
-  "description": "oclif example Hello World CLI (ESM)",
+  "description": "Quickly interact with your development databases",
   "devDependencies": {
     "@oclif/prettier-config": "^0.2.1",
     "@oclif/test": "^3",
@@ -59,11 +61,7 @@
       "@oclif/plugin-plugins"
     ],
     "topicSeparator": " ",
-    "topics": {
-      "hello": {
-        "description": "Say hello to the world and others"
-      }
-    }
+    "topics": {}
   },
   "repository": "nabeelvalley/sqlq",
   "version": "0.0.0",

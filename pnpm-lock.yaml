@@ -6,6 +6,7 @@ specifiers:
   '@oclif/plugin-plugins': ^4
   '@oclif/prettier-config': ^0.2.1
   '@oclif/test': ^3
+  '@prisma/client': 5.7.0
   '@types/chai': ^4
   '@types/mocha': ^10
   '@types/node': ^18
@@ -25,6 +26,7 @@ dependencies:
   '@oclif/core': 3.14.1_typescript@5.3.3
   '@oclif/plugin-help': 5.2.20_mjm5rvs3crwkkwzn34htd5e6ta
   '@oclif/plugin-plugins': 4.1.10_typescript@5.3.3
+  '@prisma/client': 5.7.0_prisma@5.7.0
   prisma: 5.7.0
 
 devDependencies:
@@ -657,6 +659,19 @@ packages:
     requiresBuild: true
     dev: true
     optional: true
+
+  /@prisma/client/5.7.0_prisma@5.7.0:
+    resolution: {integrity: sha512-cZmglCrfNbYpzUtz7HscVHl38e9CrUs31nrVoGUK1nIPXGgt8hT4jj2s657UXcNdQ/jBUxDgGmHyu2Nyrq1txg==}
+    engines: {node: '>=16.13'}
+    requiresBuild: true
+    peerDependencies:
+      prisma: '*'
+    peerDependenciesMeta:
+      prisma:
+        optional: true
+    dependencies:
+      prisma: 5.7.0
+    dev: false
 
   /@prisma/debug/5.7.0:
     resolution: {integrity: sha512-tZ+MOjWlVvz1kOEhNYMa4QUGURY+kgOUBqLHYIV8jmCsMuvA1tWcn7qtIMLzYWCbDcQT4ZS8xDgK0R2gl6/0wA==}

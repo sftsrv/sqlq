@@ -1,6 +1,6 @@
 # SQLQ
 
-A simple CLI for working with databases during development
+A simple CLI for working with databases during development for quick queries and automation
 
 # Goals
 
