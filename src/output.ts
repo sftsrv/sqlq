@@ -12,9 +12,9 @@ type Format = keyof typeof printers
 
 const formats = Object.keys(printers) as Format[]
 
-export const printFormatted = (format: Format = 'js', value: any) => printers[format](value)
+export const printFormatted = (format: Format = 'table', value: any) => printers[format](value)
 
 export const format = Flags.string({
   options: formats,
-  default: 'js',
+  default: 'table',
 }) as OptionFlag<Format>
