@@ -13,6 +13,7 @@ export default class Create extends AppCommand {
       options: drivers,
     }),
     connectionString: Args.string({description: 'Connection string for database', required: true}),
+    description: Args.string({description: 'Description of connection', required: false}),
   }
 
   static description = 'Create a connection to a database'
@@ -23,13 +24,12 @@ export default class Create extends AppCommand {
 
   static flags = {
     format,
-    description: Flags.string({description: 'Description of connection', required: false, aliases: ['d']}),
   }
 
   async run(): Promise<any> {
     const {args, flags} = await this.parse(Create)
-    const {alias, driver, connectionString} = args
-    const {format, description} = flags
+    const {alias, driver, connectionString, description} = args
+    const {format} = flags
 
     const connection = await this.db.connection.findFirst({
       where: {

@@ -25,29 +25,26 @@ export default class List extends AppCommand {
     const {search = ''} = args
     const {count, format} = flags
 
-    const result = await this.load(
-      'Searching',
-      this.db.tool.findMany({
-        take: count,
-        orderBy: {
-          lastUsed: 'desc',
-        },
-        where: {
-          OR: [
-            {
-              query: {
-                contains: search,
-              },
+    const result = await this.db.tool.findMany({
+      take: count,
+      orderBy: {
+        lastUsed: 'desc',
+      },
+      where: {
+        OR: [
+          {
+            query: {
+              contains: search,
             },
-            {
-              description: {
-                contains: search,
-              },
+          },
+          {
+            description: {
+              contains: search,
             },
-          ],
-        },
-      }),
-    )
+          },
+        ],
+      },
+    })
 
     printFormatted(format, result)
   }

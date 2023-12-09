@@ -43,38 +43,20 @@ export abstract class AppCommand extends Command {
       },
     })
 
-  static confirmFlag = Flags.boolean({
-    description: 'Bypass query confirmation',
-    aliases: ['y'],
-  })
-
   async executeQuery(driver: string, alias: string, connectionString: string, query: string, format: Format) {
     if (!isDriver(driver)) {
       ux.error(`Connection has driver '${driver}' which is not supported`)
     }
 
+    const message = `Running query on ${alias} ${connectionString}\n  ${query}`
+
     try {
-      const result = await runQuery(driver, connectionString, query)
-      console.log('here', result)
-      // const result = await this.load('Executing query', task)
+      const result = await this.load(message, runQuery(driver, connectionString, query))
       printFormatted(format, result)
       await this.saveHistory(alias, query, true)
     } catch (err) {
       await this.saveHistory(alias, query, false)
       throw err
-    }
-  }
-
-  async confirmQuery(alias: string, query: string, skip: boolean) {
-    const message = `Execute on ${alias}: \n  ${query}`
-    if (skip) {
-      console.log(message)
-      return
-    }
-
-    const isConfirmed = await ux.confirm(message)
-    if (!isConfirmed) {
-      ux.error('Execution cancelled')
     }
   }
 

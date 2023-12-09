@@ -22,14 +22,11 @@ export default class Get extends AppCommand {
     const {name} = args
     const {format} = flags
 
-    const result = await this.load(
-      'Searching',
-      this.db.tool.findFirst({
-        where: {
-          name,
-        },
-      }),
-    )
+    const result = await this.db.tool.findFirst({
+      where: {
+        name,
+      },
+    })
 
     if (!result) {
       ux.error(`Tool with name '${name}' not found`)

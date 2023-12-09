@@ -31,31 +31,28 @@ export default class List extends AppCommand {
     const {search = ''} = args
     const {alias, count, aliasExact, format} = flags
 
-    const result = await this.load(
-      'Searching',
-      this.db.history.findMany({
-        take: count,
-        orderBy: {
-          lastUsed: 'desc',
-        },
+    const result = await this.db.history.findMany({
+      take: count,
+      orderBy: {
+        lastUsed: 'desc',
+      },
 
-        where: {
-          OR: [
-            {
-              query: {
-                contains: search,
-              },
+      where: {
+        OR: [
+          {
+            query: {
+              contains: search,
             },
-            {
-              connectionAlias: {
-                equals: aliasExact ? alias : undefined,
-                contains: aliasExact ? undefined : alias,
-              },
+          },
+          {
+            connectionAlias: {
+              equals: aliasExact ? alias : undefined,
+              contains: aliasExact ? undefined : alias,
             },
-          ],
-        },
-      }),
-    )
+          },
+        ],
+      },
+    })
 
     printFormatted(format, result)
   }

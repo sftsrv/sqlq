@@ -18,10 +18,10 @@ const mssql: QueryHandler = async (connectionString, query) => {
   const client = await MSSQL.connect(connectionString)
   try {
     const result = await MSSQL.query(query)
-    await client.close()
+    client.close()
     return result.output
   } catch (err) {
-    await client.close()
+    client.close()
     throw err
   }
 }
@@ -31,10 +31,10 @@ const pg: QueryHandler = async (connectionString, query) => {
   try {
     await client.connect()
     const result = await client.query(query)
-    await client.end()
+    client.end()
     return result.rows
   } catch (err) {
-    await client.end()
+    client.end()
     throw err
   }
 }

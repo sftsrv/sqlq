@@ -22,14 +22,11 @@ export default class Get extends AppCommand {
     const {id} = args
     const {format} = flags
 
-    const result = await this.load(
-      'Searching',
-      this.db.history.findFirst({
-        where: {
-          id,
-        },
-      }),
-    )
+    const result = await this.db.history.findFirst({
+      where: {
+        id,
+      },
+    })
 
     if (!result) {
       ux.error(`History with id '${id}' not found`)

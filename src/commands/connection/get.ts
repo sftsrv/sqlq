@@ -24,14 +24,11 @@ export default class Get extends AppCommand {
     const {alias} = args
     const {format} = flags
 
-    const result = await this.load(
-      'Searching',
-      this.db.connection.findFirst({
-        where: {
-          alias,
-        },
-      }),
-    )
+    const result = await this.db.connection.findFirst({
+      where: {
+        alias,
+      },
+    })
 
     this.assertConnectionExists(alias, result)
 

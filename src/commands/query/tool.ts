@@ -13,11 +13,8 @@ export default class Tool extends AppCommand {
 
   static examples = []
 
-  static aliases = ['history:query']
-
   static flags = {
     format,
-    confirm: this.confirmFlag,
     params: Flags.string({
       multiple: true,
       aliases: ['p'],
@@ -28,7 +25,7 @@ export default class Tool extends AppCommand {
   async run(): Promise<any> {
     const {args, flags} = await this.parse(Tool)
     const {alias, name} = args
-    const {format, confirm, params} = flags
+    const {format, params} = flags
 
     const [connection, tool] = await Promise.all([
       this.getConnection(alias),
@@ -47,8 +44,6 @@ export default class Tool extends AppCommand {
 
     const query = buildQuery(tool.query, params)
 
-    await this.confirmQuery(alias, query, confirm)
-
     await this.executeQuery(connection.driver, alias, connection.connectionString, query, format)
 
     await this.db.tool.update({
@@ -64,6 +59,7 @@ export default class Tool extends AppCommand {
     })
   }
 }
+
 function buildQuery(query: string, params: string[] = []) {
   return params.reduce((acc, param, i) => acc.replaceAll('$' + i, param), query)
 }
