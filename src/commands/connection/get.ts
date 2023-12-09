@@ -6,10 +6,10 @@ import {AppCommand} from '../../AppCommand.js'
 
 export default class Get extends AppCommand {
   static args = {
-    id: Args.integer({description: 'ID of item in history list', required: true}),
+    alias: Args.string({description: 'Alias for connection', required: true}),
   }
 
-  static description = 'Get query from history'
+  static description = 'Get connection'
 
   static examples = []
 
@@ -19,21 +19,19 @@ export default class Get extends AppCommand {
 
   async run(): Promise<any> {
     const {flags, args} = await this.parse(Get)
-    const {id} = args
+    const {alias} = args
     const {format} = flags
 
     const result = await this.load(
       'Searching',
-      this.db.history.findFirst({
+      this.db.connection.findFirst({
         where: {
-          id,
+          alias,
         },
       }),
     )
 
-    if (!result) {
-      ux.error(`History with id '${id}' not found`)
-    }
+    this.assertConnectionExists(alias, result)
 
     printFormatted(format, result)
   }
