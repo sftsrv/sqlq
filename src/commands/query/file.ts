@@ -1,6 +1,6 @@
 import {Args, Command, ux} from '@oclif/core'
 import {PrismaClient} from '@prisma/client'
-import {format, printFormatted} from '../../output.js'
+import {format, outfile, outputData} from '../../output.js'
 import {sqlqdb} from '../../database.js'
 import {AppCommand} from '../../AppCommand.js'
 import {readFile} from 'fs/promises'
@@ -17,18 +17,19 @@ export default class File extends AppCommand {
 
   static flags = {
     format,
+    outfile,
   }
 
   async run(): Promise<any> {
     const {args, flags} = await this.parse(File)
     const {alias, file} = args
-    const {format} = flags
+    const {format, outfile} = flags
 
     const query = await readFile(file, 'utf-8')
 
     const connection = await this.getConnection(alias)
     this.assertConnectionExists(alias, connection)
 
-    this.printQueryWithHistory(connection.driver, alias, connection.connectionString, query, format)
+    this.printQueryWithHistory(connection.driver, alias, connection.connectionString, query, format, outfile)
   }
 }

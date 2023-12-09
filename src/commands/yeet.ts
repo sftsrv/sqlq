@@ -1,6 +1,6 @@
 import {Args} from '@oclif/core'
 import {AppCommand} from '../AppCommand.js'
-import {format} from '../output.js'
+import {format, outfile} from '../output.js'
 import {assertDriver, drivers} from '../database.js'
 
 export default class Yeet extends AppCommand {
@@ -16,15 +16,16 @@ export default class Yeet extends AppCommand {
 
   static flags = {
     format,
+    outfile,
   }
 
   async run(): Promise<any> {
     const {args, flags} = await this.parse(Yeet)
     const {connectionString, query, driver} = args
-    const {format} = flags
+    const {format, outfile} = flags
 
     assertDriver(driver)
 
-    await this.printQuery(driver, connectionString, query, format)
+    await this.printQuery(driver, connectionString, query, format, outfile)
   }
 }

@@ -1,6 +1,6 @@
 import {Args, Command, Flags, ux} from '@oclif/core'
 import {PrismaClient} from '@prisma/client'
-import {format, printFormatted} from '../../output.js'
+import {format, outfile, outputData} from '../../output.js'
 import {sqlqdb} from '../../database.js'
 import {AppCommand} from '../../AppCommand.js'
 
@@ -17,6 +17,7 @@ export default class List extends AppCommand {
 
   static flags = {
     format,
+    outfile,
     alias: Flags.string({description: 'Alias for connection', required: false, aliases: ['a']}),
     aliasExact: Flags.boolean({
       description: 'If alias should match exactly',
@@ -29,7 +30,7 @@ export default class List extends AppCommand {
   async run(): Promise<any> {
     const {flags, args} = await this.parse(List)
     const {search = ''} = args
-    const {alias, count, aliasExact, format} = flags
+    const {alias, count, aliasExact, format, outfile} = flags
 
     const result = await this.sqlqdb.history.findMany({
       take: count,
@@ -54,6 +55,6 @@ export default class List extends AppCommand {
       },
     })
 
-    printFormatted(format, result)
+    outputData(format, outfile, result)
   }
 }

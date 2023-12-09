@@ -1,6 +1,6 @@
 import {Args, Command, Flags, ux} from '@oclif/core'
 import {PrismaClient} from '@prisma/client'
-import {format, printFormatted} from '../../output.js'
+import {format, outfile, outputData} from '../../output.js'
 import {sqlqdb} from '../../database.js'
 import {AppCommand} from '../../AppCommand.js'
 
@@ -17,12 +17,13 @@ export default class Delete extends AppCommand {
 
   static flags = {
     format,
+    outfile,
   }
 
   async run(): Promise<any> {
     const {args, flags} = await this.parse(Delete)
     const {alias} = args
-    const {format} = flags
+    const {format, outfile} = flags
 
     const result = await this.sqlqdb.connection.delete({
       where: {
@@ -31,6 +32,6 @@ export default class Delete extends AppCommand {
       },
     })
 
-    printFormatted(format, result)
+    outputData(format, outfile, result)
   }
 }

@@ -1,18 +1,10 @@
 import {Command, Flags, ux} from '@oclif/core'
 import {Driver, drivers, isDriver, runQuery, sqlqdb} from './database.js'
 import {Connection, PrismaClient} from '@prisma/client'
-import {Format, printFormatted} from './output.js'
+import {Format, outputData} from './output.js'
 
 export abstract class AppCommand extends Command {
   sqlqdb = sqlqdb
-
-  async load<T>(start: string, task: Promise<T>, stop?: string) {
-    ux.action.start(start)
-    const result = await task
-    ux.action.stop(stop)
-
-    return result
-  }
 
   assertConnectionExists(alias: string, connection: Connection | null): asserts connection is Connection {
     if (!connection) {
@@ -43,23 +35,27 @@ export abstract class AppCommand extends Command {
       },
     })
 
-  async printQuery(driver: Driver, connectionString: string, query: string, format: Format) {
-    console.log({query})
-    const message = `Executing query ${query.slice(0, 100)}`
-
-    const result = await this.load(message, runQuery(driver, connectionString, query))
-    printFormatted(format, result)
+  async printQuery(driver: Driver, connectionString: string, query: string, format: Format, file: string | undefined) {
+    const result = await runQuery(driver, connectionString, query)
+    outputData(format, file, result)
 
     return result
   }
 
-  async printQueryWithHistory(driver: string, alias: string, connectionString: string, query: string, format: Format) {
+  async printQueryWithHistory(
+    driver: string,
+    alias: string,
+    connectionString: string,
+    query: string,
+    format: Format,
+    file: string | undefined,
+  ) {
     if (!isDriver(driver)) {
       ux.error(`Connection has driver '${driver}' which is not supported`)
     }
 
     try {
-      await this.printQuery(driver, connectionString, query, format)
+      await this.printQuery(driver, connectionString, query, format, file)
       await this.saveHistory(alias, query, true)
     } catch (err) {
       await this.saveHistory(alias, query, false)
@@ -68,13 +64,10 @@ export abstract class AppCommand extends Command {
   }
 
   getConnection(alias: string) {
-    return this.load(
-      `Getting connection details for '${alias}'`,
-      this.sqlqdb.connection.findFirst({
-        where: {
-          alias,
-        },
-      }),
-    )
+    return this.sqlqdb.connection.findFirst({
+      where: {
+        alias,
+      },
+    })
   }
 }

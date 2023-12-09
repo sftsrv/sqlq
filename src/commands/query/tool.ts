@@ -1,6 +1,6 @@
 import {Args, Flags, ux} from '@oclif/core'
 import {PrismaClient} from '@prisma/client'
-import {format, printFormatted} from '../../output.js'
+import {format, outfile, outputData} from '../../output.js'
 import {AppCommand} from '../../AppCommand.js'
 
 export default class Tool extends AppCommand {
@@ -15,6 +15,7 @@ export default class Tool extends AppCommand {
 
   static flags = {
     format,
+    outfile,
     params: Flags.string({
       multiple: true,
       aliases: ['p'],
@@ -25,7 +26,7 @@ export default class Tool extends AppCommand {
   async run(): Promise<any> {
     const {args, flags} = await this.parse(Tool)
     const {alias, name} = args
-    const {format, params} = flags
+    const {format, params, outfile} = flags
 
     const [connection, tool] = await Promise.all([
       this.getConnection(alias),
@@ -44,7 +45,7 @@ export default class Tool extends AppCommand {
 
     const query = buildQuery(tool.query, params)
 
-    await this.printQueryWithHistory(connection.driver, alias, connection.connectionString, query, format)
+    await this.printQueryWithHistory(connection.driver, alias, connection.connectionString, query, format, outfile)
 
     await this.sqlqdb.tool.update({
       where: {

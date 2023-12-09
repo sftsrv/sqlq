@@ -1,6 +1,6 @@
 import {Args, Command, Flags, ux} from '@oclif/core'
 import {PrismaClient} from '@prisma/client'
-import {format, printFormatted} from '../../output.js'
+import {format, outfile, outputData} from '../../output.js'
 import {sqlqdb} from '../../database.js'
 import {AppCommand} from '../../AppCommand.js'
 
@@ -17,13 +17,14 @@ export default class List extends AppCommand {
 
   static flags = {
     format,
+    outfile,
     count: Flags.integer({description: 'Maximum number of results to return', required: false, default: 20}),
   }
 
   async run(): Promise<any> {
     const {flags, args} = await this.parse(List)
     const {search = ''} = args
-    const {count, format} = flags
+    const {count, format, outfile} = flags
 
     const result = await this.sqlqdb.tool.findMany({
       take: count,
@@ -46,6 +47,6 @@ export default class List extends AppCommand {
       },
     })
 
-    printFormatted(format, result)
+    outputData(format, outfile, result)
   }
 }

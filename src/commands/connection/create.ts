@@ -1,6 +1,6 @@
 import {Args, Command, Flags, ux} from '@oclif/core'
 import {PrismaClient} from '@prisma/client'
-import {format, printFormatted} from '../../output.js'
+import {format, outfile, outputData} from '../../output.js'
 import {drivers, sqlqdb} from '../../database.js'
 import {AppCommand} from '../../AppCommand.js'
 
@@ -24,12 +24,13 @@ export default class Create extends AppCommand {
 
   static flags = {
     format,
+    outfile,
   }
 
   async run(): Promise<any> {
     const {args, flags} = await this.parse(Create)
     const {alias, driver, connectionString, description} = args
-    const {format} = flags
+    const {format, outfile} = flags
 
     const connection = await this.sqlqdb.connection.findFirst({
       where: {
@@ -50,6 +51,6 @@ export default class Create extends AppCommand {
       },
     })
 
-    printFormatted(format, result)
+    outputData(format, outfile, result)
   }
 }

@@ -1,6 +1,6 @@
 import {Args, Flags, ux} from '@oclif/core'
 import {PrismaClient} from '@prisma/client'
-import {format, printFormatted} from '../../output.js'
+import {format, outfile, outputData} from '../../output.js'
 import {AppCommand} from '../../AppCommand.js'
 
 export default class History extends AppCommand {
@@ -14,13 +14,14 @@ export default class History extends AppCommand {
 
   static flags = {
     format,
+    outfile,
     withAlias: Flags.string({description: 'Override the initial alias used to run the command', required: false}),
   }
 
   async run(): Promise<any> {
     const {args, flags} = await this.parse(History)
     const {id} = args
-    const {format, withAlias} = flags
+    const {format, withAlias, outfile} = flags
 
     const history = await this.sqlqdb.history.findFirst({
       where: {
@@ -37,6 +38,13 @@ export default class History extends AppCommand {
 
     this.assertConnectionExists(alias, connection)
 
-    await this.printQueryWithHistory(connection.driver, alias, connection.connectionString, history.query, format)
+    await this.printQueryWithHistory(
+      connection.driver,
+      alias,
+      connection.connectionString,
+      history.query,
+      format,
+      outfile,
+    )
   }
 }
