@@ -1,10 +1,10 @@
 import {Command, Flags, ux} from '@oclif/core'
-import {drivers, isDriver, runQuery, sqlqdb} from './database.js'
+import {Driver, drivers, isDriver, runQuery, sqlqdb} from './database.js'
 import {Connection, PrismaClient} from '@prisma/client'
 import {Format, printFormatted} from './output.js'
 
 export abstract class AppCommand extends Command {
-  db = sqlqdb
+  sqlqdb = sqlqdb
 
   async load<T>(start: string, task: Promise<T>, stop?: string) {
     ux.action.start(start)
@@ -21,7 +21,7 @@ export abstract class AppCommand extends Command {
   }
 
   saveHistory = (connectionAlias: string, query: string, success: boolean) =>
-    this.db.history.upsert({
+    this.sqlqdb.history.upsert({
       update: {
         lastUsed: new Date(),
         count: {
@@ -43,16 +43,23 @@ export abstract class AppCommand extends Command {
       },
     })
 
-  async executeQuery(driver: string, alias: string, connectionString: string, query: string, format: Format) {
+  async printQuery(driver: Driver, connectionString: string, query: string, format: Format) {
+    console.log({query})
+    const message = `Executing query ${query.slice(0, 100)}`
+
+    const result = await this.load(message, runQuery(driver, connectionString, query))
+    printFormatted(format, result)
+
+    return result
+  }
+
+  async printQueryWithHistory(driver: string, alias: string, connectionString: string, query: string, format: Format) {
     if (!isDriver(driver)) {
       ux.error(`Connection has driver '${driver}' which is not supported`)
     }
 
-    const message = `Running query on ${alias} ${connectionString}\n  ${query}`
-
     try {
-      const result = await this.load(message, runQuery(driver, connectionString, query))
-      printFormatted(format, result)
+      await this.printQuery(driver, connectionString, query, format)
       await this.saveHistory(alias, query, true)
     } catch (err) {
       await this.saveHistory(alias, query, false)
@@ -63,7 +70,7 @@ export abstract class AppCommand extends Command {
   getConnection(alias: string) {
     return this.load(
       `Getting connection details for '${alias}'`,
-      this.db.connection.findFirst({
+      this.sqlqdb.connection.findFirst({
         where: {
           alias,
         },

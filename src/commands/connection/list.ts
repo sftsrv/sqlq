@@ -27,7 +27,7 @@ export default class List extends AppCommand {
     const {search = ''} = args
     const {format} = flags
 
-    const result = await this.db.connection.findMany({
+    const result = await this.sqlqdb.connection.findMany({
       where: {
         OR: [
           {

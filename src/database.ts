@@ -1,17 +1,27 @@
+import {ux} from '@oclif/core'
 import {PrismaClient} from '@prisma/client'
 import MSSQL from 'mssql'
 import PG from 'pg'
+import * as SQLite from 'sqlite'
+import SQLite3 from 'sqlite3'
 
 export const sqlqdb = new PrismaClient()
 
 type QueryHandler = (connectionString: string, query: string) => Promise<any>
 
-const sqlite: QueryHandler = (connectionString, query) => {
-  const client = new PrismaClient({
-    datasourceUrl: connectionString,
+const sqlite: QueryHandler = async (connectionString, query) => {
+  const client = await SQLite.open({
+    filename: connectionString,
+    driver: SQLite3.Database,
   })
 
-  return client.$queryRawUnsafe(query)
+  try {
+    const result = await client.all(query)
+    return result
+  } catch (err) {
+    await client.close()
+    throw err
+  }
 }
 
 const mssql: QueryHandler = async (connectionString, query) => {
@@ -45,7 +55,7 @@ export const driver = {
   pg: 'pg',
 } as const
 
-type Driver = keyof typeof driver
+export type Driver = keyof typeof driver
 
 const handlers: Record<Driver, QueryHandler> = {
   mssql,
@@ -54,6 +64,14 @@ const handlers: Record<Driver, QueryHandler> = {
 }
 
 export const isDriver = (str: string): str is Driver => str in driver
+
+export function assertDriver(str: string): asserts str is Driver {
+  if (isDriver(str)) {
+    return
+  }
+
+  ux.error(`Invalid driver provided '${str}'`)
+}
 
 export const drivers = Object.keys(driver)
 

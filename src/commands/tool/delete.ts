@@ -22,7 +22,7 @@ export default class Delete extends AppCommand {
     const {name} = args
     const {format} = flags
 
-    const result = await this.db.tool.delete({
+    const result = await this.sqlqdb.tool.delete({
       where: {
         name,
       },

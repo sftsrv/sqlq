@@ -25,7 +25,7 @@ export default class List extends AppCommand {
     const {search = ''} = args
     const {count, format} = flags
 
-    const result = await this.db.tool.findMany({
+    const result = await this.sqlqdb.tool.findMany({
       take: count,
       orderBy: {
         lastUsed: 'desc',

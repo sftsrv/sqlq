@@ -24,11 +24,17 @@
     "@oclif/plugin-help": "^5",
     "@oclif/plugin-plugins": "^4",
     "@prisma/client": "5.7.0",
+    "@types/inquirer": "^9.0.7",
     "@types/mssql": "^9.1.4",
     "@types/pg": "^8.10.9",
+    "csv": "^6.3.6",
+    "inquirer": "^9.2.12",
     "mssql": "^10.0.1",
     "pg": "^8.11.3",
-    "prisma": "^5.7.0"
+    "prisma": "^5.7.0",
+    "sqlite": "^5.1.1",
+    "sqlite3": "^5.1.6",
+    "yaml": "^2.3.4"
   },
   "description": "Quickly interact with your development databases",
   "devDependencies": {

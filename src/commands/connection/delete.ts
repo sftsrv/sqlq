@@ -24,7 +24,7 @@ export default class Delete extends AppCommand {
     const {alias} = args
     const {format} = flags
 
-    const result = await this.db.connection.delete({
+    const result = await this.sqlqdb.connection.delete({
       where: {
         alias,
         editable: false,

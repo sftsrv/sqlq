@@ -22,7 +22,7 @@ export default class Get extends AppCommand {
     const {id} = args
     const {format} = flags
 
-    const result = await this.db.history.findFirst({
+    const result = await this.sqlqdb.history.findFirst({
       where: {
         id,
       },

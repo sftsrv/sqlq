@@ -29,6 +29,6 @@ export default class File extends AppCommand {
     const connection = await this.getConnection(alias)
     this.assertConnectionExists(alias, connection)
 
-    this.executeQuery(connection.driver, alias, connection.connectionString, query, format)
+    this.printQueryWithHistory(connection.driver, alias, connection.connectionString, query, format)
   }
 }

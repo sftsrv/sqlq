@@ -22,7 +22,7 @@ export default class Get extends AppCommand {
     const {name} = args
     const {format} = flags
 
-    const result = await this.db.tool.findFirst({
+    const result = await this.sqlqdb.tool.findFirst({
       where: {
         name,
       },

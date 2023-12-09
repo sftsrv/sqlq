@@ -31,7 +31,7 @@ export default class Create extends AppCommand {
     const {name, query, description} = args
     const {format} = flags
 
-    const result = await this.db.tool.create({
+    const result = await this.sqlqdb.tool.create({
       data: {
         name,
         query,

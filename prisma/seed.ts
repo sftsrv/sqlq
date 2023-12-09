@@ -1,11 +1,12 @@
 import {PrismaClient} from '@prisma/client'
+import {resolve} from 'path'
 
 const client = new PrismaClient()
 
 const seed = async () => {
-  const alias = 'sqlq'
-  const connectionString = 'file:./app.db'
-  const description = 'SQLQ application data'
+  const alias = 'sqlq-sample'
+  const description = 'Sample SQLite DB'
+  const connectionString = resolve('./sample.db')
 
   return client.connection.upsert({
     where: {

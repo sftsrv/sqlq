@@ -22,7 +22,7 @@ export default class Delete extends AppCommand {
     const {id} = args
     const {format} = flags
 
-    const result = await this.db.history.delete({
+    const result = await this.sqlqdb.history.delete({
       where: {
         id,
       },

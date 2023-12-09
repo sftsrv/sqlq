@@ -31,7 +31,7 @@ export default class List extends AppCommand {
     const {search = ''} = args
     const {alias, count, aliasExact, format} = flags
 
-    const result = await this.db.history.findMany({
+    const result = await this.sqlqdb.history.findMany({
       take: count,
       orderBy: {
         lastUsed: 'desc',

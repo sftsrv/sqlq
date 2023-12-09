@@ -31,7 +31,7 @@ export default class Create extends AppCommand {
     const {alias, driver, connectionString, description} = args
     const {format} = flags
 
-    const connection = await this.db.connection.findFirst({
+    const connection = await this.sqlqdb.connection.findFirst({
       where: {
         alias,
       },
@@ -41,7 +41,7 @@ export default class Create extends AppCommand {
       ux.error(`Connection with alias ${alias} already exists`)
     }
 
-    const result = await this.db.connection.create({
+    const result = await this.sqlqdb.connection.create({
       data: {
         alias,
         connectionString,

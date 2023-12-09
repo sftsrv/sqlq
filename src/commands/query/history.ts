@@ -22,7 +22,7 @@ export default class History extends AppCommand {
     const {id} = args
     const {format, withAlias} = flags
 
-    const history = await this.db.history.findFirst({
+    const history = await this.sqlqdb.history.findFirst({
       where: {
         id,
       },
@@ -37,6 +37,6 @@ export default class History extends AppCommand {
 
     this.assertConnectionExists(alias, connection)
 
-    await this.executeQuery(connection.driver, alias, connection.connectionString, history.query, format)
+    await this.printQueryWithHistory(connection.driver, alias, connection.connectionString, history.query, format)
   }
 }

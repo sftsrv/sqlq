@@ -19,3 +19,4 @@ oclif.lock
 oclif.manifest.json
 /prisma/app.db
 /prisma/app.db-journal
+/sample.db

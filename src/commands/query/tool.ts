@@ -29,7 +29,7 @@ export default class Tool extends AppCommand {
 
     const [connection, tool] = await Promise.all([
       this.getConnection(alias),
-      this.db.tool.findFirst({
+      this.sqlqdb.tool.findFirst({
         where: {
           name,
         },
@@ -44,9 +44,9 @@ export default class Tool extends AppCommand {
 
     const query = buildQuery(tool.query, params)
 
-    await this.executeQuery(connection.driver, alias, connection.connectionString, query, format)
+    await this.printQueryWithHistory(connection.driver, alias, connection.connectionString, query, format)
 
-    await this.db.tool.update({
+    await this.sqlqdb.tool.update({
       where: {
         name,
       },

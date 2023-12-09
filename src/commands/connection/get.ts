@@ -24,7 +24,7 @@ export default class Get extends AppCommand {
     const {alias} = args
     const {format} = flags
 
-    const result = await this.db.connection.findFirst({
+    const result = await this.sqlqdb.connection.findFirst({
       where: {
         alias,
       },
