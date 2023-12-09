@@ -29,7 +29,7 @@ export default class List extends AppCommand {
   async run(): Promise<any> {
     const {flags, args} = await this.parse(List)
     const {search = ''} = args
-    const {alias = '', count, aliasExact, format} = flags
+    const {alias, count, aliasExact, format} = flags
 
     const result = await this.load(
       'Searching',
@@ -40,7 +40,7 @@ export default class List extends AppCommand {
         },
 
         where: {
-          AND: [
+          OR: [
             {
               query: {
                 contains: search,
