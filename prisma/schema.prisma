@@ -14,7 +14,6 @@ model Connection {
   alias            String   @id @unique
   created          DateTime @default(now())
   updated          DateTime @default(now())
-  editable         Boolean  @default(true)
   description      String?
   connectionString String
 
@@ -32,7 +31,7 @@ model History {
   count    Int      @default(1)
   query    String
 
-  connection      Connection @relation(fields: [connectionAlias], references: [alias])
+  connection      Connection @relation(fields: [connectionAlias], references: [alias], onDelete: Cascade)
   connectionAlias String
   success         Boolean
 

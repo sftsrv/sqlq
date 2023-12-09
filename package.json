@@ -5,9 +5,8 @@
   },
   "scripts": {
     "dev": "yarn run build && node ./bin/run.js",
-    "build": "shx rm -rf dist && tsc -b",
+    "build": "tsc -b",
     "lint": "eslint . --ext .ts",
-    "postpack": "shx rm -f oclif.manifest.json",
     "posttest": "yarn lint",
     "prepack": "yarn build && oclif manifest && yarn run docs",
     "prepare": "yarn build",
