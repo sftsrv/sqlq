@@ -1,4 +1,4 @@
-import {Flags} from '@oclif/core'
+import {Flags, ux} from '@oclif/core'
 import {OptionFlag} from '@oclif/core/lib/interfaces/index.js'
 
 const printers = {

@@ -11,11 +11,10 @@ datasource db {
 }
 
 model Connection {
-  id               Int      @id @default(autoincrement())
+  alias            String   @id @unique
   created          DateTime @default(now())
   updated          DateTime @default(now())
   editable         Boolean  @default(true)
-  alias            String   @unique
   description      String?
   connectionString String
 
@@ -23,11 +22,12 @@ model Connection {
 }
 
 model History {
-  id      Int      @id @default(autoincrement())
-  created DateTime @default(now())
-  updated DateTime @default(now())
-  query   String
+  id       Int      @id @default(autoincrement())
+  created  DateTime @default(now())
+  lastUsed DateTime @default(now())
+  query    String
 
-  connection   Connection @relation(fields: [connectionId], references: [id])
-  connectionId Int
+  connection      Connection @relation(fields: [connectionAlias], references: [alias])
+  connectionAlias String
+  success         Boolean
 }

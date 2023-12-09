@@ -1,12 +1,18 @@
-import {Args, Command} from '@oclif/core'
+import {Args, Command, Flags} from '@oclif/core'
 import {PrismaClient} from '@prisma/client'
 import {format, printFormatted} from '../../output.js'
 import {sqlqdb} from '../../database.js'
+import {AppCommand} from '../../AppCommand.js'
 
-export default class Exec extends Command {
+export default class List extends AppCommand {
   static args = {
-    search: Args.string({description: 'Search for a connection by alias', required: false}),
+    search: Args.string({
+      description: 'Search for a connection by alias, desciption, and conection string',
+      required: false,
+    }),
   }
+
+  static aliases = ['ls']
 
   static description = 'List all saved connections'
 
@@ -17,17 +23,32 @@ export default class Exec extends Command {
   }
 
   async run(): Promise<any> {
-    const {args, flags} = await this.parse(Exec)
+    const {args, flags} = await this.parse(List)
     const {search = ''} = args
+    const {format} = flags
 
-    const result = await sqlqdb.connection.findMany({
+    const result = await this.db.connection.findMany({
       where: {
-        alias: {
-          contains: search,
-        },
+        OR: [
+          {
+            alias: {
+              contains: search,
+            },
+          },
+          {
+            connectionString: {
+              contains: search,
+            },
+          },
+          {
+            description: {
+              contains: search,
+            },
+          },
+        ],
       },
     })
 
-    printFormatted(flags.format, result)
+    printFormatted(format, result)
   }
 }
