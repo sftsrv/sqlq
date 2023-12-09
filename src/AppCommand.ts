@@ -1,6 +1,7 @@
-import {Command, ux} from '@oclif/core'
+import {Command, Flags, ux} from '@oclif/core'
 import {sqlqdb} from './database.js'
-import {Connection} from '@prisma/client'
+import {Connection, PrismaClient} from '@prisma/client'
+import {Format, printFormatted} from './output.js'
 
 export abstract class AppCommand extends Command {
   db = sqlqdb
@@ -41,6 +42,36 @@ export abstract class AppCommand extends Command {
         },
       },
     })
+
+  static confirmFlag = Flags.boolean({
+    description: 'Bypass query confirmation',
+    aliases: ['y'],
+  })
+
+  async executeQuery(alias: string, connectionString: string, query: string, format: Format) {
+    const client = new PrismaClient()
+    try {
+      const result = await this.load('Executing query', client.$queryRawUnsafe(query))
+      printFormatted(format, result)
+      await this.saveHistory(alias, query, true)
+    } catch (err) {
+      await this.saveHistory(alias, query, false)
+      throw err
+    }
+  }
+
+  async confirmQuery(alias: string, query: string, skip: boolean) {
+    const message = `Execute on ${alias}: \n  ${query}`
+    if (skip) {
+      console.log(message)
+      return
+    }
+
+    const isConfirmed = await ux.confirm(message)
+    if (!isConfirmed) {
+      ux.error('Execution cancelled')
+    }
+  }
 
   getConnection(alias: string) {
     return this.load(

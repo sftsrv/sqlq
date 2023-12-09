@@ -8,7 +8,7 @@ const printers = {
   csv: (data: unknown) => console.log(JSON.stringify(data, null, 2)),
 } as const
 
-type Format = keyof typeof printers
+export type Format = keyof typeof printers
 
 const formats = Object.keys(printers) as Format[]
 

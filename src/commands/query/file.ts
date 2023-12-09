@@ -29,17 +29,6 @@ export default class File extends AppCommand {
     const connection = await this.getConnection(alias)
     this.assertConnectionExists(alias, connection)
 
-    const client = new PrismaClient({
-      datasourceUrl: connection.connectionString,
-    })
-
-    try {
-      const result = await this.load('Executing query', client.$queryRawUnsafe(query))
-      printFormatted(format, result)
-      await this.saveHistory(alias, query, true)
-    } catch (err) {
-      await this.saveHistory(alias, query, false)
-      throw err
-    }
+    this.executeQuery(alias, connection.connectionString, query, format)
   }
 }

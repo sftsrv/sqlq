@@ -26,7 +26,7 @@ model History {
 
   created  DateTime @default(now())
   lastUsed DateTime @default(now())
-  count    Int      @default(0)
+  count    Int      @default(1)
   query    String
 
   connection      Connection @relation(fields: [connectionAlias], references: [alias])
@@ -34,4 +34,14 @@ model History {
   success         Boolean
 
   @@unique([query, connectionAlias])
+}
+
+model Tool {
+  name        String    @id @unique
+  created     DateTime  @default(now())
+  lastUsed    DateTime?
+  query       String
+  description String?
+
+  count Int @default(0)
 }

@@ -12,7 +12,8 @@
     "prepack": "pnpm build && oclif manifest && oclif readme",
     "prepare": "pnpm build",
     "prisma": "prisma",
-    "oclif": "oclif"
+    "oclif": "oclif",
+    "postinstall": "prisma migrate dev"
   },
   "prisma": {
     "seed": "ts-node prisma/seed.ts"
