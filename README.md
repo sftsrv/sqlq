@@ -4,7 +4,7 @@ A simple CLI for working with databases during development for quick queries and
 
 # Goals
 
-- [ ] Manage list of connections
+- [x] Manage list of connections
 - [ ] Manage list of common queries with an alias
 - [ ] Manage/migrate own internal DB in the real app using diesel (auto migration support lacking)
 - [ ] Support different output formats, e.g. CSV/JSON/Table View

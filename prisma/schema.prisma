@@ -22,12 +22,16 @@ model Connection {
 }
 
 model History {
-  id       Int      @id @default(autoincrement())
+  id Int @id @default(autoincrement())
+
   created  DateTime @default(now())
   lastUsed DateTime @default(now())
+  count    Int      @default(0)
   query    String
 
   connection      Connection @relation(fields: [connectionAlias], references: [alias])
   connectionAlias String
   success         Boolean
+
+  @@unique([query, connectionAlias])
 }

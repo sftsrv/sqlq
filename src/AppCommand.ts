@@ -19,6 +19,29 @@ export abstract class AppCommand extends Command {
     }
   }
 
+  saveHistory = (connectionAlias: string, query: string, success: boolean) =>
+    this.db.history.upsert({
+      update: {
+        lastUsed: new Date(),
+        count: {
+          increment: 1,
+        },
+      },
+      create: {
+        query,
+        success,
+        lastUsed: new Date(),
+        connectionAlias,
+        count: 1,
+      },
+      where: {
+        query_connectionAlias: {
+          connectionAlias,
+          query,
+        },
+      },
+    })
+
   getConnection(alias: string) {
     return this.load(
       `Getting connection details for '${alias}'`,

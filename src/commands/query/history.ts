@@ -41,29 +41,14 @@ export default class SQL extends AppCommand {
       datasourceUrl: connection.connectionString,
     })
 
-    const saveHistory = (success: boolean) =>
-      this.db.history.upsert({
-        where: {
-          id,
-          connectionAlias: alias,
-        },
-        update: {
-          lastUsed: new Date(),
-        },
-        create: {
-          success,
-          lastUsed: new Date(),
-          query: history.query,
-          connectionAlias: alias,
-        },
-      })
+    const query = history.query
 
     try {
-      const result = await this.load('Executing query', client.$queryRawUnsafe(history.query))
+      const result = await this.load('Executing query', client.$queryRawUnsafe(query))
       printFormatted(format, result)
-      await saveHistory(true)
+      await this.saveHistory(alias, query, true)
     } catch (err) {
-      await saveHistory(false)
+      await this.saveHistory(alias, query, false)
       throw err
     }
   }
