@@ -46,14 +46,13 @@ Currently the application should work fine with:
 - [ ] Run a parameterized query using a CSV for multiple inputs?
 
 <!-- commands -->
-
 # Command Topics
 
-- [`sqlq connection`](docs/connection.md) - Create a connection to a database
-- [`sqlq help`](docs/help.md) - Display help for sqlq.
-- [`sqlq history`](docs/history.md) - Delete a history entry
-- [`sqlq query`](docs/query.md) - Query data from a database by file
-- [`sqlq tool`](docs/tool.md) - Create a tool
-- [`sqlq yeet`](docs/yeet.md) - Run a query via connection string. Not saved in history.
+* [`sqlq connection`](docs/connection.md) - Create a connection to a database
+* [`sqlq help`](docs/help.md) - Display help for sqlq.
+* [`sqlq history`](docs/history.md) - Delete a history entry
+* [`sqlq query`](docs/query.md) - Query data from a database by file
+* [`sqlq tool`](docs/tool.md) - Create a tool
+* [`sqlq yeet`](docs/yeet.md) - Run a query via connection string. Not saved in history.
 
 <!-- commandsstop -->

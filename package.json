@@ -55,7 +55,8 @@
   "files": [
     "/bin",
     "/dist",
-    "/oclif.manifest.json"
+    "/oclif.manifest.json",
+    "/prisma"
   ],
   "homepage": "https://github.com/nabeelvalley/sqlq",
   "license": "MIT",
@@ -72,7 +73,7 @@
     "topics": {}
   },
   "repository": "nabeelvalley/sqlq",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "bugs": "https://github.com/nabeelvalley/sqlq/issues",
   "keywords": [
     "oclif"
