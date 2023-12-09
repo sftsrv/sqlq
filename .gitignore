@@ -17,6 +17,6 @@ node_modules
 node_modules
 oclif.lock
 oclif.manifest.json
-/prisma/app.db
-/prisma/app.db-journal
+/prisma/sqlq.db
+/prisma/sqlq.db-journal
 /sample.db

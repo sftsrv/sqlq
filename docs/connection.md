@@ -15,7 +15,8 @@ Create a connection to a database
 
 ```
 USAGE
-  $ sqlq connection create ALIAS DRIVER CONNECTIONSTRING [DESCRIPTION] [--format js|table|json|csv]
+  $ sqlq connection create ALIAS DRIVER CONNECTIONSTRING [DESCRIPTION] [--format js|table|json|yml|yaml|csv|ssv]
+    [--outfile <value>]
 
 ARGUMENTS
   ALIAS             Alias for connection
@@ -25,7 +26,8 @@ ARGUMENTS
 
 FLAGS
   --format=<option>  [default: table]
-                     <options: js|table|json|csv>
+                     <options: js|table|json|yml|yaml|csv|ssv>
+  --outfile=<value>  Print output to file
 
 DESCRIPTION
   Create a connection to a database
@@ -42,14 +44,15 @@ Delete a connection
 
 ```
 USAGE
-  $ sqlq connection delete ALIAS [--format js|table|json|csv]
+  $ sqlq connection delete ALIAS [--format js|table|json|yml|yaml|csv|ssv] [--outfile <value>]
 
 ARGUMENTS
   ALIAS  Alias of connection to delete
 
 FLAGS
   --format=<option>  [default: table]
-                     <options: js|table|json|csv>
+                     <options: js|table|json|yml|yaml|csv|ssv>
+  --outfile=<value>  Print output to file
 
 DESCRIPTION
   Delete a connection
@@ -66,14 +69,15 @@ Get connection
 
 ```
 USAGE
-  $ sqlq connection get ALIAS [--format js|table|json|csv]
+  $ sqlq connection get ALIAS [--format js|table|json|yml|yaml|csv|ssv] [--outfile <value>]
 
 ARGUMENTS
   ALIAS  Alias for connection
 
 FLAGS
   --format=<option>  [default: table]
-                     <options: js|table|json|csv>
+                     <options: js|table|json|yml|yaml|csv|ssv>
+  --outfile=<value>  Print output to file
 
 DESCRIPTION
   Get connection
@@ -90,14 +94,15 @@ List all saved connections
 
 ```
 USAGE
-  $ sqlq connection list [SEARCH] [--format js|table|json|csv]
+  $ sqlq connection list [SEARCH] [--format js|table|json|yml|yaml|csv|ssv] [--outfile <value>]
 
 ARGUMENTS
   SEARCH  Search for a connection by alias, description, or conection string
 
 FLAGS
   --format=<option>  [default: table]
-                     <options: js|table|json|csv>
+                     <options: js|table|json|yml|yaml|csv|ssv>
+  --outfile=<value>  Print output to file
 
 DESCRIPTION
   List all saved connections
@@ -115,14 +120,15 @@ List all saved connections
 
 ```
 USAGE
-  $ sqlq connection ls [SEARCH] [--format js|table|json|csv]
+  $ sqlq connection ls [SEARCH] [--format js|table|json|yml|yaml|csv|ssv] [--outfile <value>]
 
 ARGUMENTS
   SEARCH  Search for a connection by alias, description, or conection string
 
 FLAGS
   --format=<option>  [default: table]
-                     <options: js|table|json|csv>
+                     <options: js|table|json|yml|yaml|csv|ssv>
+  --outfile=<value>  Print output to file
 
 DESCRIPTION
   List all saved connections

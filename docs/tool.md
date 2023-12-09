@@ -8,7 +8,6 @@ Create a tool
 * [`sqlq tool get NAME`](#sqlq-tool-get-name)
 * [`sqlq tool list [SEARCH]`](#sqlq-tool-list-search)
 * [`sqlq tool ls [SEARCH]`](#sqlq-tool-ls-search)
-* [`sqlq tool query ALIAS NAME`](#sqlq-tool-query-alias-name)
 * [`sqlq tool update NAME [QUERY] [DESCRIPTION]`](#sqlq-tool-update-name-query-description)
 
 ## `sqlq tool create NAME QUERY [DESCRIPTION]`
@@ -17,7 +16,7 @@ Create a tool
 
 ```
 USAGE
-  $ sqlq tool create NAME QUERY [DESCRIPTION] [--format js|table|json|csv]
+  $ sqlq tool create NAME QUERY [DESCRIPTION] [--format js|table|json|yml|yaml|csv|ssv] [--outfile <value>]
 
 ARGUMENTS
   NAME         Name for the tool
@@ -27,7 +26,8 @@ ARGUMENTS
 
 FLAGS
   --format=<option>  [default: table]
-                     <options: js|table|json|csv>
+                     <options: js|table|json|yml|yaml|csv|ssv>
+  --outfile=<value>  Print output to file
 
 DESCRIPTION
   Create a tool
@@ -41,14 +41,15 @@ Delete a tool
 
 ```
 USAGE
-  $ sqlq tool delete NAME [--format js|table|json|csv]
+  $ sqlq tool delete NAME [--format js|table|json|yml|yaml|csv|ssv] [--outfile <value>]
 
 ARGUMENTS
   NAME  Name of tool to delete
 
 FLAGS
   --format=<option>  [default: table]
-                     <options: js|table|json|csv>
+                     <options: js|table|json|yml|yaml|csv|ssv>
+  --outfile=<value>  Print output to file
 
 DESCRIPTION
   Delete a tool
@@ -62,14 +63,15 @@ Get a tool
 
 ```
 USAGE
-  $ sqlq tool get NAME [--format js|table|json|csv]
+  $ sqlq tool get NAME [--format js|table|json|yml|yaml|csv|ssv] [--outfile <value>]
 
 ARGUMENTS
   NAME  Name of tool
 
 FLAGS
   --format=<option>  [default: table]
-                     <options: js|table|json|csv>
+                     <options: js|table|json|yml|yaml|csv|ssv>
+  --outfile=<value>  Print output to file
 
 DESCRIPTION
   Get a tool
@@ -83,7 +85,7 @@ Search tools
 
 ```
 USAGE
-  $ sqlq tool list [SEARCH] [--format js|table|json|csv] [--count <value>]
+  $ sqlq tool list [SEARCH] [--format js|table|json|yml|yaml|csv|ssv] [--outfile <value>] [--count <value>]
 
 ARGUMENTS
   SEARCH  Part of a query to search for
@@ -91,7 +93,8 @@ ARGUMENTS
 FLAGS
   --count=<value>    [default: 20] Maximum number of results to return
   --format=<option>  [default: table]
-                     <options: js|table|json|csv>
+                     <options: js|table|json|yml|yaml|csv|ssv>
+  --outfile=<value>  Print output to file
 
 DESCRIPTION
   Search tools
@@ -108,7 +111,7 @@ Search tools
 
 ```
 USAGE
-  $ sqlq tool ls [SEARCH] [--format js|table|json|csv] [--count <value>]
+  $ sqlq tool ls [SEARCH] [--format js|table|json|yml|yaml|csv|ssv] [--outfile <value>] [--count <value>]
 
 ARGUMENTS
   SEARCH  Part of a query to search for
@@ -116,7 +119,8 @@ ARGUMENTS
 FLAGS
   --count=<value>    [default: 20] Maximum number of results to return
   --format=<option>  [default: table]
-                     <options: js|table|json|csv>
+                     <options: js|table|json|yml|yaml|csv|ssv>
+  --outfile=<value>  Print output to file
 
 DESCRIPTION
   Search tools
@@ -125,34 +129,13 @@ ALIASES
   $ sqlq tool ls
 ```
 
-## `sqlq tool query ALIAS NAME`
-
-Use a tool with a connection
-
-```
-USAGE
-  $ sqlq tool query ALIAS NAME [--format js|table|json|csv] [--params <value>]
-
-ARGUMENTS
-  ALIAS  Connection alias to invoke the tool against
-  NAME   Name of tool to execute
-
-FLAGS
-  --format=<option>    [default: table]
-                       <options: js|table|json|csv>
-  --params=<value>...  Parameter to use in subcommand
-
-DESCRIPTION
-  Use a tool with a connection
-```
-
 ## `sqlq tool update NAME [QUERY] [DESCRIPTION]`
 
 Update a tool
 
 ```
 USAGE
-  $ sqlq tool update NAME [QUERY] [DESCRIPTION] [--format js|table|json|csv]
+  $ sqlq tool update NAME [QUERY] [DESCRIPTION] [--format js|table|json|yml|yaml|csv|ssv] [--outfile <value>]
 
 ARGUMENTS
   NAME         Name for the tool
@@ -162,7 +145,8 @@ ARGUMENTS
 
 FLAGS
   --format=<option>  [default: table]
-                     <options: js|table|json|csv>
+                     <options: js|table|json|yml|yaml|csv|ssv>
+  --outfile=<value>  Print output to file
 
 DESCRIPTION
   Update a tool

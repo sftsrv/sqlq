@@ -7,7 +7,6 @@ Delete a history entry
 * [`sqlq history get ID`](#sqlq-history-get-id)
 * [`sqlq history list [SEARCH]`](#sqlq-history-list-search)
 * [`sqlq history ls [SEARCH]`](#sqlq-history-ls-search)
-* [`sqlq history query ID`](#sqlq-history-query-id)
 
 ## `sqlq history delete ID`
 
@@ -15,14 +14,15 @@ Delete a history entry
 
 ```
 USAGE
-  $ sqlq history delete ID [--format js|table|json|csv]
+  $ sqlq history delete ID [--format js|table|json|yml|yaml|csv|ssv] [--outfile <value>]
 
 ARGUMENTS
   ID  ID of history entry to delete
 
 FLAGS
   --format=<option>  [default: table]
-                     <options: js|table|json|csv>
+                     <options: js|table|json|yml|yaml|csv|ssv>
+  --outfile=<value>  Print output to file
 
 DESCRIPTION
   Delete a history entry
@@ -36,14 +36,15 @@ Get a history entry
 
 ```
 USAGE
-  $ sqlq history get ID [--format js|table|json|csv]
+  $ sqlq history get ID [--format js|table|json|yml|yaml|csv|ssv] [--outfile <value>]
 
 ARGUMENTS
   ID  ID of history entry
 
 FLAGS
   --format=<option>  [default: table]
-                     <options: js|table|json|csv>
+                     <options: js|table|json|yml|yaml|csv|ssv>
+  --outfile=<value>  Print output to file
 
 DESCRIPTION
   Get a history entry
@@ -57,7 +58,8 @@ Search query history
 
 ```
 USAGE
-  $ sqlq history list [SEARCH] [--format js|table|json|csv] [--alias <value>] [--aliasExact] [--count <value>]
+  $ sqlq history list [SEARCH] [--format js|table|json|yml|yaml|csv|ssv] [--outfile <value>] [--alias <value>]
+    [--aliasExact] [--count <value>]
 
 ARGUMENTS
   SEARCH  Part of a query to search for
@@ -67,7 +69,8 @@ FLAGS
   --aliasExact       If alias should match exactly
   --count=<value>    [default: 20] Maximum number of results to return
   --format=<option>  [default: table]
-                     <options: js|table|json|csv>
+                     <options: js|table|json|yml|yaml|csv|ssv>
+  --outfile=<value>  Print output to file
 
 DESCRIPTION
   Search query history
@@ -84,7 +87,8 @@ Search query history
 
 ```
 USAGE
-  $ sqlq history ls [SEARCH] [--format js|table|json|csv] [--alias <value>] [--aliasExact] [--count <value>]
+  $ sqlq history ls [SEARCH] [--format js|table|json|yml|yaml|csv|ssv] [--outfile <value>] [--alias <value>]
+    [--aliasExact] [--count <value>]
 
 ARGUMENTS
   SEARCH  Part of a query to search for
@@ -94,31 +98,12 @@ FLAGS
   --aliasExact       If alias should match exactly
   --count=<value>    [default: 20] Maximum number of results to return
   --format=<option>  [default: table]
-                     <options: js|table|json|csv>
+                     <options: js|table|json|yml|yaml|csv|ssv>
+  --outfile=<value>  Print output to file
 
 DESCRIPTION
   Search query history
 
 ALIASES
   $ sqlq history ls
-```
-
-## `sqlq history query ID`
-
-Re-run a previous database query
-
-```
-USAGE
-  $ sqlq history query ID [--format js|table|json|csv] [--withAlias <value>]
-
-ARGUMENTS
-  ID  ID of history entry to execute
-
-FLAGS
-  --format=<option>    [default: table]
-                       <options: js|table|json|csv>
-  --withAlias=<value>  Override the initial alias used to run the command
-
-DESCRIPTION
-  Re-run a previous database query
 ```
