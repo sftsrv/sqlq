@@ -16,9 +16,6 @@
     "postinstall": "prisma migrate dev",
     "docs": "oclif readme --multi"
   },
-  "prisma": {
-    "seed": "ts-node prisma/seed.ts"
-  },
   "dependencies": {
     "@oclif/core": "^3",
     "@oclif/plugin-help": "^5",
