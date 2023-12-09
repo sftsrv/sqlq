@@ -4,13 +4,13 @@
     "sqlq": "./bin/run.js"
   },
   "scripts": {
-    "dev": "pnpm run build && node ./bin/run.js",
+    "dev": "yarn run build && node ./bin/run.js",
     "build": "shx rm -rf dist && tsc -b",
     "lint": "eslint . --ext .ts",
     "postpack": "shx rm -f oclif.manifest.json",
-    "posttest": "pnpm lint",
-    "prepack": "pnpm build && oclif manifest && pnpm run docs",
-    "prepare": "pnpm build",
+    "posttest": "yarn lint",
+    "prepack": "yarn build && oclif manifest && yarn run docs",
+    "prepare": "yarn build",
     "prisma": "prisma",
     "oclif": "oclif",
     "postinstall": "prisma migrate dev",
