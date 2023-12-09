@@ -49,7 +49,9 @@ export abstract class AppCommand extends Command {
   })
 
   async executeQuery(alias: string, connectionString: string, query: string, format: Format) {
-    const client = new PrismaClient()
+    const client = new PrismaClient({
+      datasourceUrl: connectionString,
+    })
     try {
       const result = await this.load('Executing query', client.$queryRawUnsafe(query))
       printFormatted(format, result)
