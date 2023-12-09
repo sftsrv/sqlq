@@ -2,8 +2,6 @@
 
 A little CLI for working with databases during development for quick queries and automation
 
-# Usage
-
 Install the CLI from NPM using your fave package manager. If you don't have a fave, just use `npm`:
 
 ```sh
@@ -15,6 +13,30 @@ Then, you should be able to view the application help using:
 ```sh
 sqlq help
 ```
+
+Which should show you the root help menu:
+
+```txt
+Quickly interact with your development databases
+
+VERSION
+  sqlq/0.0.2 win32-x64 node-v20.10.0
+
+USAGE
+  $ sqlq [COMMAND]
+
+TOPICS
+  connection  Create a connection to a database
+  history     Delete a history entry
+  query       Query data from a database by file
+  tool        Create a tool
+
+COMMANDS
+  help  Display help for sqlq.
+  yeet  Run a query via connection string. Not saved in history.
+```
+
+# Usage
 
 The flow for using the application is as follows:
 
@@ -46,13 +68,14 @@ Currently the application should work fine with:
 - [ ] Run a parameterized query using a CSV for multiple inputs?
 
 <!-- commands -->
+
 # Command Topics
 
-* [`sqlq connection`](docs/connection.md) - Create a connection to a database
-* [`sqlq help`](docs/help.md) - Display help for sqlq.
-* [`sqlq history`](docs/history.md) - Delete a history entry
-* [`sqlq query`](docs/query.md) - Query data from a database by file
-* [`sqlq tool`](docs/tool.md) - Create a tool
-* [`sqlq yeet`](docs/yeet.md) - Run a query via connection string. Not saved in history.
+- [`sqlq connection`](docs/connection.md) - Create a connection to a database
+- [`sqlq help`](docs/help.md) - Display help for sqlq.
+- [`sqlq history`](docs/history.md) - Delete a history entry
+- [`sqlq query`](docs/query.md) - Query data from a database by file
+- [`sqlq tool`](docs/tool.md) - Create a tool
+- [`sqlq yeet`](docs/yeet.md) - Run a query via connection string. Not saved in history.
 
 <!-- commandsstop -->
