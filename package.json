@@ -9,11 +9,12 @@
     "lint": "eslint . --ext .ts",
     "postpack": "shx rm -f oclif.manifest.json",
     "posttest": "pnpm lint",
-    "prepack": "pnpm build && oclif manifest && oclif readme",
+    "prepack": "pnpm build && oclif manifest && pnpm run docs",
     "prepare": "pnpm build",
     "prisma": "prisma",
     "oclif": "oclif",
-    "postinstall": "prisma migrate dev"
+    "postinstall": "prisma migrate dev",
+    "docs": "oclif readme --multi"
   },
   "prisma": {
     "seed": "ts-node prisma/seed.ts"

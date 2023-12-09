@@ -5,7 +5,9 @@ const printers = {
   js: (data: unknown) => console.log(data),
   table: (data: unknown) => console.table(data),
   json: (data: unknown) => console.log(JSON.stringify(data, null, 2)),
-  csv: (data: unknown) => console.log(JSON.stringify(data, null, 2)),
+  csv: (data: unknown) => {
+    throw new Error('CSV output not yet supported')
+  },
 } as const
 
 export type Format = keyof typeof printers
