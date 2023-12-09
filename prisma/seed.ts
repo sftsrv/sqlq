@@ -16,6 +16,7 @@ const seed = async () => {
       alias,
       connectionString,
       description,
+      driver: 'sqlite',
       editable: false,
     },
   })

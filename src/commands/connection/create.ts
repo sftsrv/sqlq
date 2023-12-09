@@ -1,12 +1,17 @@
 import {Args, Command, Flags, ux} from '@oclif/core'
 import {PrismaClient} from '@prisma/client'
 import {format, printFormatted} from '../../output.js'
-import {sqlqdb} from '../../database.js'
+import {drivers, sqlqdb} from '../../database.js'
 import {AppCommand} from '../../AppCommand.js'
 
 export default class Create extends AppCommand {
   static args = {
     alias: Args.string({description: 'Alias for connection', required: true}),
+    driver: Args.string({
+      description: 'The type of driver to use when working to the database',
+      required: true,
+      options: drivers,
+    }),
     connectionString: Args.string({description: 'Connection string for database', required: true}),
   }
 
@@ -23,7 +28,7 @@ export default class Create extends AppCommand {
 
   async run(): Promise<any> {
     const {args, flags} = await this.parse(Create)
-    const {alias, connectionString} = args
+    const {alias, driver, connectionString} = args
     const {format, description} = flags
 
     const connection = await this.db.connection.findFirst({
@@ -41,6 +46,7 @@ export default class Create extends AppCommand {
         alias,
         connectionString,
         description,
+        driver,
       },
     })
 

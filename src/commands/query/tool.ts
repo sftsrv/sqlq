@@ -49,7 +49,7 @@ export default class Tool extends AppCommand {
 
     await this.confirmQuery(alias, query, confirm)
 
-    await this.executeQuery(alias, connection.connectionString, query, format)
+    await this.executeQuery(connection.driver, alias, connection.connectionString, query, format)
 
     await this.db.tool.update({
       where: {

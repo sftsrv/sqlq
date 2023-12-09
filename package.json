@@ -23,6 +23,10 @@
     "@oclif/plugin-help": "^5",
     "@oclif/plugin-plugins": "^4",
     "@prisma/client": "5.7.0",
+    "@types/mssql": "^9.1.4",
+    "@types/pg": "^8.10.9",
+    "mssql": "^10.0.1",
+    "pg": "^8.11.3",
     "prisma": "^5.7.0"
   },
   "description": "Quickly interact with your development databases",

@@ -42,6 +42,6 @@ export default class SQL extends AppCommand {
 
     await this.confirmQuery(alias, history.query, confirm)
 
-    await this.executeQuery(alias, connection.connectionString, history.query, format)
+    await this.executeQuery(connection.driver, alias, connection.connectionString, history.query, format)
   }
 }

@@ -18,6 +18,9 @@ model Connection {
   description      String?
   connectionString String
 
+  //  SQLite does not support enums so using a string. App needs to verify these
+  driver String
+
   History History[]
 }
 

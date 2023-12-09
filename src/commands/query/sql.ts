@@ -26,6 +26,6 @@ export default class SQL extends AppCommand {
     const connection = await this.getConnection(alias)
     this.assertConnectionExists(alias, connection)
 
-    await this.executeQuery(alias, connection.connectionString, query, format)
+    await this.executeQuery(connection.driver, alias, connection.connectionString, query, format)
   }
 }

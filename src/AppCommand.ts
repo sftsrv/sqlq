@@ -1,5 +1,5 @@
 import {Command, Flags, ux} from '@oclif/core'
-import {sqlqdb} from './database.js'
+import {drivers, isDriver, runQuery, sqlqdb} from './database.js'
 import {Connection, PrismaClient} from '@prisma/client'
 import {Format, printFormatted} from './output.js'
 
@@ -48,12 +48,15 @@ export abstract class AppCommand extends Command {
     aliases: ['y'],
   })
 
-  async executeQuery(alias: string, connectionString: string, query: string, format: Format) {
-    const client = new PrismaClient({
-      datasourceUrl: connectionString,
-    })
+  async executeQuery(driver: string, alias: string, connectionString: string, query: string, format: Format) {
+    if (!isDriver(driver)) {
+      ux.error(`Connection has driver '${driver}' which is not supported`)
+    }
+
     try {
-      const result = await this.load('Executing query', client.$queryRawUnsafe(query))
+      const result = await runQuery(driver, connectionString, query)
+      console.log('here', result)
+      // const result = await this.load('Executing query', task)
       printFormatted(format, result)
       await this.saveHistory(alias, query, true)
     } catch (err) {
