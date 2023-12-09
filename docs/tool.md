@@ -146,8 +146,6 @@ DESCRIPTION
   Use a tool with a connection
 ```
 
-_See code: [dist/commands/tool/query.ts](https://github.com/nabeelvalley/sqlq/blob/v0.0.0/dist/commands/tool/query.ts)_
-
 ## `sqlq tool update NAME [QUERY] [DESCRIPTION]`
 
 Update a tool

@@ -122,5 +122,3 @@ FLAGS
 DESCRIPTION
   Re-run a previous database query
 ```
-
-_See code: [dist/commands/history/query.ts](https://github.com/nabeelvalley/sqlq/blob/v0.0.0/dist/commands/history/query.ts)_
