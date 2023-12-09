@@ -17,6 +17,8 @@ export default class Get extends AppCommand {
     format,
   }
 
+  static aliases = ['conn:get']
+
   async run(): Promise<any> {
     const {flags, args} = await this.parse(Get)
     const {alias} = args

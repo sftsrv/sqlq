@@ -10,9 +10,11 @@ export default class Create extends AppCommand {
     connectionString: Args.string({description: 'Connection string for database', required: true}),
   }
 
-  static description = 'Exec a query on the given database'
+  static description = 'Create a connection to a database'
 
   static examples = []
+
+  static aliases = ['conn:create']
 
   static flags = {
     format,

@@ -5,10 +5,12 @@ import {AppCommand} from '../../AppCommand.js'
 
 export default class SQL extends AppCommand {
   static args = {
-    id: Args.integer({description: 'ID of history command to execute', required: true}),
+    id: Args.integer({description: 'ID of history entry to execute', required: true}),
   }
 
   static description = 'Re-run a previous database query'
+
+  static aliases = ['history:query']
 
   static examples = []
 

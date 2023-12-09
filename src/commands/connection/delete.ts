@@ -13,6 +13,8 @@ export default class Delete extends AppCommand {
 
   static examples = []
 
+  static aliases = ['conn:delete']
+
   static flags = {
     format,
   }

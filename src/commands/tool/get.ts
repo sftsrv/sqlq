@@ -6,10 +6,10 @@ import {AppCommand} from '../../AppCommand.js'
 
 export default class Get extends AppCommand {
   static args = {
-    id: Args.integer({description: 'ID of history entry', required: true}),
+    name: Args.string({description: 'Name of tool', required: true}),
   }
 
-  static description = 'Get a history entry'
+  static description = 'Get a tool'
 
   static examples = []
 
@@ -19,20 +19,20 @@ export default class Get extends AppCommand {
 
   async run(): Promise<any> {
     const {flags, args} = await this.parse(Get)
-    const {id} = args
+    const {name} = args
     const {format} = flags
 
     const result = await this.load(
       'Searching',
-      this.db.history.findFirst({
+      this.db.tool.findFirst({
         where: {
-          id,
+          name,
         },
       }),
     )
 
     if (!result) {
-      ux.error(`History with id '${id}' not found`)
+      ux.error(`Tool with name '${name}' not found`)
     }
 
     printFormatted(format, result)

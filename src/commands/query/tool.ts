@@ -13,6 +13,8 @@ export default class Tool extends AppCommand {
 
   static examples = []
 
+  static aliases = ['history:query']
+
   static flags = {
     format,
     confirm: this.confirmFlag,
@@ -48,6 +50,18 @@ export default class Tool extends AppCommand {
     await this.confirmQuery(alias, query, confirm)
 
     await this.executeQuery(alias, connection.connectionString, query, format)
+
+    await this.db.tool.update({
+      where: {
+        name,
+      },
+      data: {
+        count: {
+          increment: 1,
+        },
+        lastUsed: new Date(),
+      },
+    })
   }
 }
 function buildQuery(query: string, params: string[] = []) {

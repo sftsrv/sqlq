@@ -39,6 +39,7 @@ model History {
 model Tool {
   name        String    @id @unique
   created     DateTime  @default(now())
+  updated     DateTime  @default(now())
   lastUsed    DateTime?
   query       String
   description String?

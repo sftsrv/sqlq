@@ -11,7 +11,7 @@ export default class File extends AppCommand {
     file: Args.file({description: 'Path to file containing SQL query', required: true, exists: true}),
   }
 
-  static description = 'Query data from a database'
+  static description = 'Query data from a database by file'
 
   static examples = []
 

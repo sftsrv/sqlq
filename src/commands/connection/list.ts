@@ -7,12 +7,12 @@ import {AppCommand} from '../../AppCommand.js'
 export default class List extends AppCommand {
   static args = {
     search: Args.string({
-      description: 'Search for a connection by alias, desciption, and conection string',
+      description: 'Search for a connection by alias, description, or conection string',
       required: false,
     }),
   }
 
-  static aliases = ['ls']
+  static aliases = ['connection:ls', 'conn:ls']
 
   static description = 'List all saved connections'
 

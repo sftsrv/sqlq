@@ -9,36 +9,29 @@ export default class List extends AppCommand {
     search: Args.string({description: 'Part of a query to search for', required: false}),
   }
 
-  static aliases = ['history:ls']
+  static aliases = ['tool:ls']
 
-  static description = 'Search query history'
+  static description = 'Search tools'
 
   static examples = []
 
   static flags = {
     format,
-    alias: Flags.string({description: 'Alias for connection', required: false, aliases: ['a']}),
-    aliasExact: Flags.boolean({
-      description: 'If alias should match exactly',
-      required: false,
-      default: false,
-    }),
     count: Flags.integer({description: 'Maximum number of results to return', required: false, default: 20}),
   }
 
   async run(): Promise<any> {
     const {flags, args} = await this.parse(List)
     const {search = ''} = args
-    const {alias, count, aliasExact, format} = flags
+    const {count, format} = flags
 
     const result = await this.load(
       'Searching',
-      this.db.history.findMany({
+      this.db.tool.findMany({
         take: count,
         orderBy: {
           lastUsed: 'desc',
         },
-
         where: {
           OR: [
             {
@@ -47,9 +40,8 @@ export default class List extends AppCommand {
               },
             },
             {
-              connectionAlias: {
-                equals: aliasExact ? alias : undefined,
-                contains: aliasExact ? undefined : alias,
+              description: {
+                contains: search,
               },
             },
           ],
