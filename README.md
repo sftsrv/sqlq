@@ -51,10 +51,13 @@ Currently the application supports:
 
 1. SQLite
    - Connection String as pth to the DB File: `./mydatabase.db`. Relative paths may be used but will be resolved from the current directory
+   - Uses [sqlite](https://www.npmjs.com/package/sqlite)
 2. PostgreSQL
    - Connection String in Postgres format: `postgres://username:password@hostname:PORT/databasename`
+   - Uses [pg](https://www.npmjs.com/package/pg)
 3. Microsoft SQL Server
    - Connection String in SQL Server Format: `Server=hostname:PORT;Database=databasename;User Id=username;Password=password;Trusted_Connection=True;`. Can also add `Encrypt=False;` to the end for working with dbs
+   - Uses [mssql](https://www.npmjs.com/package/mssql) 
 
 > Contributions welcome for additional database support
 
