@@ -29,7 +29,7 @@ const mssql: QueryHandler = async (connectionString, query) => {
   try {
     const result = await MSSQL.query(query)
     client.close()
-    return result.output
+    return result.recordSet
   } catch (err) {
     client.close()
     throw err
