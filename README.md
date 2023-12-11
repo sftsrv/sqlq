@@ -61,15 +61,17 @@ Currently the application supports:
 
 > Contributions welcome for additional database support
 
-# Goals
+# Features
 
-- [x] Manage list of connections
-- [x] Manage list of common queries with an alias
-- [x] Manage/migrate own internal DB in the real app (TBC, should work)
-- [x] Support different output formats, e.g. CSV/JSON/Table View
+1. Run a single query or a file against any supported database connection
+2. Manage database connections
+3. Run queries against a database connection
+4. Create reusable and parameterized queries
+5. View history of queries that were run
 
 # Maybe to do
 
+- [ ] Export/save data or use some kind of local connections config file for sharing between people
 - [ ] Creation of DB instances on the user's machine - SQLite? PG? Docker?
 - [ ] Run a parameterized query using a CSV for multiple inputs?
 
