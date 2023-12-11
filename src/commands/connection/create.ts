@@ -6,19 +6,23 @@ import {AppCommand} from '../../AppCommand.js'
 
 export default class Create extends AppCommand {
   static args = {
-    alias: Args.string({description: 'Alias for connection', required: true}),
     driver: Args.string({
       description: 'The type of driver to use when working to the database',
       required: true,
       options: drivers,
     }),
+    alias: Args.string({description: 'Alias for connection', required: true}),
     connectionString: Args.string({description: 'Connection string for database', required: true}),
     description: Args.string({description: 'Description of connection', required: false}),
   }
 
   static description = 'Create a connection to a database'
 
-  static examples = []
+  static examples = [
+    `sqlq connection create sqlite my-sqlite-db /path/to/file.db`,
+    `sqlq connection create pg postgres://username:password@hostname:PORT/databasename`,
+    `sqlq connection create mssql Server=hostname:PORT;Database=databasename;User Id=username;Password=password;Trusted_Connection=True;`,
+  ]
 
   static aliases = ['conn:create']
 

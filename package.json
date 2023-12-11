@@ -13,7 +13,7 @@
     "prisma": "prisma",
     "oclif": "oclif",
     "postinstall": "prisma migrate dev",
-    "docs": "oclif readme --multi"
+    "docs": "oclif readme"
   },
   "dependencies": {
     "@oclif/core": "^3",
@@ -72,7 +72,7 @@
     "topics": {}
   },
   "repository": "nabeelvalley/sqlq",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "bugs": "https://github.com/nabeelvalley/sqlq/issues",
   "keywords": [
     "oclif"
