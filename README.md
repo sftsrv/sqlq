@@ -47,11 +47,14 @@ The flow for using the application is as follows:
 
 # Supported Databases
 
-Currently the application should work fine with:
+Currently the application supports:
 
 1. SQLite
-2. PostgreSQL
-3. Microsoft SQL Server
+   - Connection String as pth to the DB File: `./mydatabase.db`. Relative paths may be used but will be resolved from the current directory
+3. PostgreSQL
+   - Connection String in Postgres format: `postgres://username:password@hostname:PORT/databasename`
+5. Microsoft SQL Server
+   - Connection String in SQL Server Format: `Server=hostname:PORT;Database=databasename;User Id=username;Password=password;Trusted_Connection=True;`. Can also add `Encrypt=False;` to the end for working with dbs
 
 > Contributions welcome for additional database support
 
