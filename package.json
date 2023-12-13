@@ -4,12 +4,12 @@
     "sqlq": "./bin/run.js"
   },
   "scripts": {
-    "dev": "yarn run build && node ./bin/run.js",
+    "dev": "npm run build && node ./bin/run.js",
     "build": "tsc -b",
     "lint": "eslint . --ext .ts",
-    "posttest": "yarn lint",
-    "prepack": "yarn build && oclif manifest && yarn run docs",
-    "prepare": "yarn build",
+    "posttest": "npm run lint",
+    "prepack": "npm run build && oclif manifest && npm run docs",
+    "prepare": "npm run build",
     "prisma": "prisma",
     "oclif": "oclif",
     "postinstall": "prisma migrate dev",
@@ -72,7 +72,7 @@
     "topics": {}
   },
   "repository": "nabeelvalley/sqlq",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "bugs": "https://github.com/nabeelvalley/sqlq/issues",
   "keywords": [
     "oclif"
